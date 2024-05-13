@@ -29,7 +29,7 @@ def signup(request):
             return redirect("login")
 
     return render(request, 'signup.html')
-# signup view
+# signup view tugadi
 
 # custom_login view
 def custom_login(request):

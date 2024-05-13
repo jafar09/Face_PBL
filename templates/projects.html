@@ -24,7 +24,7 @@
         <tbody>
             {% for i in data %}
             <tr>
-                <th scope="row">{{i.id}}</th>
+                <th scope="row">{{forloop.counter}}</th>
                 <td>{{i.first_name}}</td>
                 <td>{{i.last_name}}</td>
                 <td>{{i.phone}}</td>
