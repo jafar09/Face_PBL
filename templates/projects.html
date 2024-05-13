@@ -1,0 +1,58 @@
+{% extends 'home.html'%}
+
+{% block content %}
+
+
+<!-- Dispalay Data  -->
+<div class="container">
+
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">first_name</th>
+                <th scope="col">last_name</th>
+                <th scope="col">phone</th>
+                <th scope="col">email</th>
+                <th scope="col">gender</th>
+                <th scope="col">joined_date</th>
+                <th scope="col">image</th>
+                <th scope="col">description</th>
+                <th scope="col">#</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <th scope="row">{{i.id}}</th>
+                <td>{{i.first_name}}</td>
+                <td>{{i.last_name}}</td>
+                <td>{{i.phone}}</td>
+                <td>{{i.email}}</td>
+                <td>{{i.gender}}</td>
+                <td>{{i.joined_date}}</td>
+                <td>{{i.image}}</td>
+                <td>{{i.description}}</td>
+               <td>
+                <!-- Update icon -->
+                <a href="{% url 'update' i.id %}">
+                <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <!-- Delete Icon -->
+                <form action="{% url 'delete' i.id %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </form>
+                
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
+
+

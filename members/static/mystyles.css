@@ -1,0 +1,78 @@
+a{
+  text-decoration: none;
+}
+
+.google{
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 1.5%;
+  margin-top: 1%;
+}
+
+.tagline{
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 0;
+  margin-bottom: 1.5%;
+  font-family: serif;
+  color: gray;
+}
+
+.signin{
+  text-align: center;
+  font-size: 1.4rem;
+  font-family: sans-serif;
+  color: gray;
+}
+
+form{
+  width: 30%;
+  margin: auto;
+  overflow: hidden;
+  background-color: #f4f4f4;
+}
+
+img{
+  width: 20%;
+  display: block;
+  margin: 8% auto;
+}
+
+.input{
+  display: block;
+  padding: 0.8rem 1rem;
+  width: 80%;
+  margin: auto;
+  
+}
+
+.btn{
+  width: 89%;
+  background-color: #4285F4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  margin: 3% 5%;
+}
+
+.block{
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+  font-family: sans-serif;
+  margin-bottom: 3%;
+}
+
+.checkbox{
+  float: left;
+}
+
+.help{
+  float: right;
+}
+
+.create, .every{
+  text-align: center;
+  font-family: sans-serif;
+}
