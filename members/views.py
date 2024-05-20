@@ -95,6 +95,9 @@ def Update_Record(request,id):
     if request.method=='POST':
         data=Member.objects.get(pk=id)
         form = ProjectForm(instance=data)
+        print("==============================")
+        print(form.is_valid())
+        print("==============================")
         if form.is_valid():
             form.save()
     else:
