@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'members',
+    'members'
 ]
 
 MIDDLEWARE = [
@@ -121,7 +121,8 @@ STATIC_URL = 'static/'
 
 STATIC_ROOT = BASE_DIR / 'static'
 
-MEDIA_ROOT= os.path.join(BASE_DIR, 'static/photo')
+MEDIA_ROOT= os.path.join(BASE_DIR, 'photo'),
+# MEDIA_ROOT = BASE_DIR / 'photo'
 
 # STATICFILES_DIRS = ['members/static']
 

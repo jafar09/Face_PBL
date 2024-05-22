@@ -6,6 +6,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login , authenticate , login, logout 
 from django.contrib import messages
 from .models import Member
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+# from .utils import is_ajax, classify_face
+import base64
+# from logs.models import Log 
+from django.core.files.base import ContentFile
+from django.contrib.auth.models import User
 # @login_required(login_url='login')
 
 # home view
@@ -42,7 +49,7 @@ def custom_login(request):
             return redirect("home")
         else:
             messages.error(request, 'Foydalanuvchi nomi yoki parol noto`g`ri.')
-            return render(request, 'login.html')  # Render login page with error message
+            return render(request, 'home.html')  # Render login page with error message
     else:
         return render(request, 'login.html')  # Render login page for GET requests
 # custom_login view tugadi
@@ -108,3 +115,30 @@ def Update_Record(request,id):
     }
     return render(request,'update.html',context)
 # update view tugadi
+
+def find_user_view(request):
+    if is_ajax(request):
+        photo = request.POST.get('photo')
+        _, str_img = photo.split(';base64')
+
+        # print(photo)
+        decoded_file = base64.b64decode(str_img)
+        print(decoded_file)
+
+        x = Log()
+        x.photo.save('upload.png', ContentFile(decoded_file))
+        x.save()
+
+        res = classify_face(x.photo.path)
+        if res:
+            user_exists = User.objects.filter(username=res).exists()
+            if user_exists:
+                user = User.objects.get(username=res)
+                profile = Profile.objects.get(user=user)
+                x.profile = profile
+                x.save()
+
+                login(request, user)
+                return JsonResponse({'success': True})
+        return JsonResponse({'success': False})
+    
