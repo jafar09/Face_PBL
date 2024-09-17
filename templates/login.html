@@ -1,10 +1,11 @@
-{% block content %}
-
-{% block scripts %}
+{% extends 'home.html' %}
 {% load static %}
 
+
+{% block scripts %}
     <script src="{% static 'login.js' %}" defer></script>
 {% endblock scripts %}
+    {% block content %}
 
       <!-- Design by foolishdeveloper.com -->
         <title>Login Page</title>
@@ -48,7 +49,7 @@
                     <label for="password">Password</label>
                     <input type="password" class="form-control" placeholder="Password" id="password" name="password">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block my-2">Log In</button>
+                <button type="submit" class="btn btn-primary btn-block my-2">LogIn</button>
                 <div class="text-center my-3">
                     <a href="{% url 'signup' %}">Create an account</a>
                 </div>

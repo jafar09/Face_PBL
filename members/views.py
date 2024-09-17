@@ -1,23 +1,27 @@
-from django.shortcuts import render, redirect,HttpResponse
+from django.shortcuts import render, redirect
 from .models import Member 
 from .forms import ProjectForm
 # Create your views here.
 from django.contrib.auth.models import User
-from django.contrib.auth import login , authenticate , login, logout 
+from django.contrib.auth import authenticate , login, logout 
 from django.contrib import messages
 from .models import Member
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-# from .utils import is_ajax, classify_face
+from django.http import JsonResponse, HttpResponse
+from ise_test.utils import is_ajax, classify_face
+from django.views.decorators.http import require_POST
 import base64
-# from logs.models import Log 
+from members.models import Log , Profile
 from django.core.files.base import ContentFile
 from django.contrib.auth.models import User
-# @login_required(login_url='login')
 
+# @login_required(login_url='login')
+def is_ajax(request):
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 # home view
+# @login_required
 def home(request):
-    return render(request, "home.html")
+    return render(request, "home.html", {})
 # home view tugadi
 
 # signup view
@@ -33,8 +37,7 @@ def signup(request):
         else:
             user = User.objects.create_user(username, email, pass1)
             user.save()
-            return redirect("login")
-
+            return redirect("home")
     return render(request, 'signup.html')
 # signup view tugadi
 
@@ -118,7 +121,7 @@ def Update_Record(request,id):
 
 def find_user_view(request):
     if is_ajax(request):
-        photo = request.POST.get('photo')
+        photo = request.POST.GET('photo')
         _, str_img = photo.split(';base64')
 
         # print(photo)
@@ -137,8 +140,6 @@ def find_user_view(request):
                 profile = Profile.objects.get(user=user)
                 x.profile = profile
                 x.save()
-
                 login(request, user)
                 return JsonResponse({'success': True})
         return JsonResponse({'success': False})
-    
